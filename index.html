@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frase de Amor</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            text-align: center;
+            transition: background-color 0.5s;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .hearts {
+            font-size: 5rem;
+            color: pink;
+            position: absolute;
+            animation: float 3s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .message {
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .big-message {
+            font-size: 3rem;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .big-message.visible {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="message" id="initialMessage">Mi niñita eres tú?</div>
+    <div class="big-message" id="bigMessage">Te amo muchísimo...</div>
+
+    <script>
+        const initialMessage = document.getElementById('initialMessage');
+        const bigMessage = document.getElementById('bigMessage');
+
+        initialMessage.addEventListener('click', () => {
+            document.body.style.backgroundColor = '#ffcccb'; // Fondo rosado pastel
+            initialMessage.classList.add('hidden');
+            bigMessage.classList.add('visible');
+
+            // Crear corazones
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('hearts');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(heart);
+
+                // Eliminar el corazón después de un tiempo
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000); // Eliminar después de 3 segundos
+            }
+        });
+    </script>
+</body>
+</html>
